@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/index.css">
+    <title>NotesApp</title>
+  </head>
+  <body>
+ 
+      <nav class="navbar navbar-light navbarBg">
+        <div class="container-fluid">
+          <a class="navbar-brand">NotesApp</a>
+          <form class="d-flex">
+            <button type="button" class="btn btn-outline-dark me-2" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+            <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+          </form>
+        </div>
+      </nav>
+
+     
+      <div id="heroContainer">
+        <div id="heroBg">
+          <video id="heroVideo" src="media/video/video.mp4" type="video/mp4" autoPlay loop muted playsInline></video>
+        </div>
+        <div id="heroContent">
+          <div id="heroItems">
+            <h1 id="heroTitle">NotesApp</h1>
+            <p>Fast, easy to use, simply beautiful!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content navbarBg">
+            <div class="modal-header">
+              <h5 class="modal-title" id="registerModalLabel">New User Registration</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="userEmailAddress" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="userEmailAddress">
+              </div>
+              <div class="mb-3">
+                <label for="username" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="username">
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" >
+              </div>
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" >
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn  btn-outline-dark" data-bs-dismiss="modal">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content navbarBg">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">User Login</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="loginEmailAddress" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="loginEmailAddress">
+              </div>
+              <div class="mb-3">
+                <label for="loginpassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="loginpassword" >
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn  btn-outline-dark" data-bs-dismiss="modal">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="userReviews" class="container-md">
+        <div class="userReviewsTitle">User Reviews</div>
+        <div class="card-group">
+          <div class="card">
+            <img src="media/img/pix1.jpg" class="card-img-top img-fluid" alt="customerphoto">
+              <div class="card-body">
+                <h5 class="card-title">Cindy Smith</h5>
+                <p class="card-text">NotesApp is so amazing. The user experience is superb.</p>
+              </div>
+          </div>
+          <div class="card">
+            <img src="media/img/pix2.jpg" class="card-img-top img-fluid" alt="customerphoto">
+                <div class="card-body">
+                  <h5 class="card-title">Jake Cola</h5>
+                  <p class="card-text">NotesApp is so amazing. The user experience is superb.</p>
+                </div>
+          </div>
+          <div class="card">
+            <img src="media/img/pix1.jpg" class="card-img-top img-fluid" alt="customerphoto">
+            <div class="card-body">
+              <h5 class="card-title">Nelly Base</h5>
+              <p class="card-text">The best note taking app I have ever used.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      
+      <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+        </ul>
+        <p class="text-center text-muted">&copy; 2021 NotesApp, Inc</p>
+      </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+  </body>
+</html>
