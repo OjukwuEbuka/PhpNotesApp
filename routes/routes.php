@@ -1,5 +1,6 @@
 <?php
 
+require_once '../db/config.php';
 require("../db/UserController.php");
 
 
@@ -12,7 +13,7 @@ switch ($mode) {
 
         //filter and Sanitize data
         $userEmail = filter_input(INPUT_POST, "userEmailAddress", FILTER_VALIDATE_EMAIL);
-        $fullname = filter_input(INPUT_POST, "fullname", FILTER_SANITIZE_STRING);
+        $fullName = filter_input(INPUT_POST, "fullName", FILTER_SANITIZE_STRING);
         $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING);
         $confirmPassword = filter_input(INPUT_POST, "confirmPassword", FILTER_SANITIZE_STRING);
 
@@ -21,8 +22,8 @@ switch ($mode) {
             $errors["email"] = "Email is not valid";
         }
 
-        if(!$fullname || strlen($fullname) < 3){
-            $errors["fullname"] = "Name must be at least 3 characters";
+        if(!$fullName || strlen($fullName) < 3){
+            $errors["fullName"] = "Name must be at least 3 characters";
         }
 
         if(!$password || strlen($password) < 6){
@@ -40,8 +41,47 @@ switch ($mode) {
         }
         else
         {
-            $registerData = ["fullname"=>$fullname, "email"=>$email, $password=>$password];
+            $newUser = new UserController;
 
+            $registerSuccess = $newUser->register($conn, $userEmail, $fullName, $password);
+
+            if($registerSuccess){
+                echo json_encode(["success" => true]);
+            }
+
+        }
+
+        break;
+
+    case "login":
+        $errors = [];
+
+        //filter and Sanitize data
+        $userEmail = filter_input(INPUT_POST, "loginEmailAddress", FILTER_VALIDATE_EMAIL);
+        $password = filter_input(INPUT_POST, "loginPassword", FILTER_SANITIZE_STRING);
+
+        //Validate data
+        if(!$userEmail || !$password || strlen($password) < 6){
+            $errors["login"] = "Email or password is incorrect";
+        }
+
+        if(count($errors) > 0){
+            echo json_encode(["errors" => $errors]);
+        }
+        else
+        {
+            $newUser = new UserController;
+
+            $loginSuccess = $newUser->login($conn, $userEmail, $password);
+
+            if($loginSuccess){
+                echo json_encode(["success" => true]);
+            }
+            else
+            {
+                $errors["login"] = "Invalid email or password";
+                echo json_encode(["errors" => $errors]);
+            }
 
         }
 

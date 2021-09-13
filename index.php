@@ -1,3 +1,17 @@
+<?php
+
+// Initialize the session
+session_start();
+ 
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    header("location: home.php");
+    exit;
+}
+
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -50,7 +64,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="fullname" class="form-label">Full Name</label>
-                  <input type="text" class="form-control" id="fullname" name="fullname">
+                  <input type="text" class="form-control" id="fullName" name="fullName">
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
@@ -82,17 +96,19 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <div class="mb-3">
-                <label for="loginEmailAddress" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="loginEmailAddress" name="loginEmailAddress">
-              </div>
-              <div class="mb-3">
-                <label for="loginpassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="loginpassword" name="loginpassword" >
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn  btn-outline-dark" data-bs-dismiss="modal">Submit</button>
+              <form action="" id="loginForm">
+                <div class="mb-3">
+                  <label for="loginEmailAddress" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="loginEmailAddress" name="loginEmailAddress">
+                </div>
+                <div class="mb-3">
+                  <label for="loginPassword" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="loginPassword" name="loginPassword" >
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn  btn-outline-dark">Submit</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
