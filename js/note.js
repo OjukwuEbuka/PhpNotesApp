@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <div class="card navbarBg">
                                 <div class="card-body noteItem" data-noteid=${note.id}>
                                     <h5 class="card-title noteTitle">${note.title}</h5>
-                                    <div class="card-text noteBody" style="max-height: 120px; width: 250px; overflow: hidden;">${note.body}</div>
+                                    <div class="card-text noteBody text-center " style="max-height: 120px; width: 230px; overflow: hidden;">${note.body}</div>
                                     <button href="#" class="btn btn-primary noteEditBtn">
                                         <i class="bi bi-pen"></i>
                                         Edit
@@ -261,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }
 
-    
+    //Handle errors returned in request
     function handleFormErrors(formErrorDiv, data) {
 
         let errorString = "<ul>";
@@ -274,12 +274,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         errorString += '</ul>'
 
-        console.log(formErrorDiv)
-
         formErrorDiv.html(errorString);
 
     }
 
+
+    //Set event listeners on buttons created on each note card
     function activateNotes(){
 
         let allNoteItems = document.querySelectorAll(".noteItem");
@@ -293,6 +293,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let noteEditBtn = note.querySelector(".noteEditBtn");
             let noteDeleteBtn = note.querySelector(".noteDeleteBtn");
     
+            //add note edit event listener
             noteEditBtn.addEventListener("click", function(e){
                 e.preventDefault();
     
@@ -309,6 +310,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             })
     
+            //add note delete event listener
             noteDeleteBtn.addEventListener("click", function(e){
                 e.preventDefault();
     
@@ -322,4 +324,6 @@ document.addEventListener("DOMContentLoaded", function() {
         })
 
     }
+
+
 })

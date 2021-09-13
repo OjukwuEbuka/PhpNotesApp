@@ -79,7 +79,7 @@ $("#registerForm").submit(function(event){
 
 });
 
-// Bind to the submit event of our form
+// Bind to the submit event of login form
 $("#loginForm").submit(function(event){
     
     event.preventDefault();
@@ -154,9 +154,7 @@ function handleFormErrors(formErrorDiv, data) {
     });
 
     errorString += '</ul>'
-
-    console.log(formErrorDiv)
-
+    
     formErrorDiv.html(errorString);
 
 }

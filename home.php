@@ -41,6 +41,7 @@ if(!isset($_SESSION["loggedin"])){
 
 
         
+        <!-- MODAL FOR NOTE CREATE AND UPDATE -->
       <div class="modal fade" id="noteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
           <div class="modal-content navbarBg">
@@ -75,6 +76,7 @@ if(!isset($_SESSION["loggedin"])){
         </div>
       </div>
 
+      <!-- NOTE DELETE MODAL -->
       <div class="modal" tabindex="-1"  id="deleteNoteModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -96,9 +98,9 @@ if(!isset($_SESSION["loggedin"])){
     </div>
       
 
-      <section class="p-5">
+      <section class="px-4 text-center">
             <h4 class="text-center">My Notes</h4>
-            <div class="text-center row row-cols-1 row-cols-md-3 g-4" id="notesList" style="max-width:100%">
+            <div class="row row-cols-1 row-cols-md-3 g-4" id="notesList" style="max-width:100%">
                                 
             </div>
         </section>

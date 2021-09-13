@@ -28,7 +28,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
  
     <?php   include('includes/navbar.php') ?>  
 
-     
+     <!-- HERO SECTION CONTAINING VIDEO -->
       <div id="heroContainer">
         <div id="heroBg">
           <video id="heroVideo" src="media/video/video.mp4" type="video/mp4" autoPlay loop muted playsInline></video>
@@ -41,6 +41,8 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         </div>
       </div>
 
+
+      <!-- MODAL FOR USER REGISTRATION -->
       <div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content navbarBg">
@@ -86,6 +88,8 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         </div>
       </div>
 
+
+      <!-- MODAL FOR USER LOGIN -->
       <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content navbarBg">
@@ -115,6 +119,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         </div>
       </div>
 
+      <!-- USER REVIEWS CARDS -->
       <div id="userReviews" class="container-md">
         <div class="userReviewsTitle">User Reviews</div>
         <div class="card-group">
