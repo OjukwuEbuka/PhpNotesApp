@@ -9,7 +9,7 @@ $mode = isset($_POST['mode']) ? $_POST['mode'] : null;
 
 switch ($mode) {
     case 'register':
-
+        //Handle Route for new user Registration
         $errors = [];
 
         //filter and Sanitize data
@@ -59,6 +59,8 @@ switch ($mode) {
         break;
 
     case "login":
+        //Handle Route for user login
+
         $errors = [];
 
         //filter and Sanitize data
@@ -92,7 +94,9 @@ switch ($mode) {
 
         break;
 
+
     case 'createNote':
+        //Handle Route for note Creation
         
         $errors = [];
 
@@ -102,15 +106,13 @@ switch ($mode) {
         $userId = filter_input(INPUT_POST, "userId", FILTER_SANITIZE_STRING);
 
         //Validate data
-        if(!$title){
+        if(!$title || strlen($title) < 3){
             $errors["title"] = "Title is not valid text";
         }
 
-        if(!$title){
+        if(!$body || strlen($body) < 3){
             $errors["body"] = "Body is not valid text";
         }
-
-
 
 
         if(count($errors) > 0){
@@ -138,25 +140,23 @@ switch ($mode) {
     
     
     case 'updateNote':
+        //Handle Route for note Update
         
         $errors = [];
 
         //filter and Sanitize data
         $title = filter_input(INPUT_POST, "noteTitle", FILTER_SANITIZE_STRING);
-        $id = filter_input(INPUT_POST, "noteid", FILTER_SANITIZE_NUMBER_INT);
+        $id = filter_input(INPUT_POST, "noteId", FILTER_SANITIZE_STRING);
         $body = filter_input(INPUT_POST, "noteBody", FILTER_SANITIZE_STRING);
 
         //Validate data
-        if(!$title){
+        if(!$title || strlen($title) < 3){
             $errors["title"] = "Title is not valid text";
         }
 
-        if(!$title){
+        if(!$body || strlen($body) < 3){
             $errors["body"] = "Body is not valid text";
         }
-
-
-
 
         if(count($errors) > 0){
 
@@ -182,6 +182,7 @@ switch ($mode) {
         break;
 
     case "getAllNotes":
+        //Handle Route for note fetch
 
         $userId = filter_input(INPUT_POST, "userId", FILTER_SANITIZE_STRING);
 
@@ -197,6 +198,27 @@ switch ($mode) {
         {
             echo json_encode(["errors" => ["note" => "Failed to fetch notes!"]]);
         }
+        break;
+
+
+    case "deleteNote":
+        //Handle Route for note delete
+
+        
+        $deleteNoteId = filter_input(INPUT_POST, "deleteNoteId", FILTER_SANITIZE_STRING);
+
+        $deleteNote = new NoteController;
+
+        $response = $deleteNote->delete($conn, $deleteNoteId);
+
+        if($response){
+            echo json_encode(["success" => $response]);
+        }
+        else
+        {
+            echo json_encode(["errors" => ["note" => "Failed to delete notes!"]]);
+        }
+        break;
     
     default:
         # code...

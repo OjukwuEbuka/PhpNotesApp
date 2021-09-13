@@ -48,9 +48,13 @@ if(!isset($_SESSION["loggedin"])){
               <h5 class="modal-title" id="noteModalLabel">Note</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div id="noteSuccess" class="alert alert-success visually-hidden" role="alert">
+                Note Submitted Successfully!
+              </div>
             <div class="modal-body">
               <form action="" id="noteForm">
                   <input type="hidden" name="userId" value=<?php echo $_SESSION['id']; ?> />
+                  <input type="hidden" name="noteId" id="noteId" value="" />
                 <div class="errorDiv">
   
                 </div>
@@ -70,29 +74,32 @@ if(!isset($_SESSION["loggedin"])){
           </div>
         </div>
       </div>
+
+      <div class="modal" tabindex="-1"  id="deleteNoteModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Modal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you wish to delete this note?</p>
+            </div>
+            <form action="" id="deleteNoteForm">
+                <input type="hidden" name="deleteNoteId" id="deleteNoteId" value="" />
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
       
 
       <section class="p-5">
             <h4 class="text-center">My Notes</h4>
             <div class="text-center row row-cols-1 row-cols-md-3 g-4" id="notesList" style="max-width:100%">
-                
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body noteItem" data-id="1">
-                            <h5 class="card-title noteTitle">Special title treatment</h5>
-                            <p class="card-text noteBody">With supporting text below as a natural lead-in to additional content.</p>
-                            <button href="#" class="btn btn-primary noteEditBtn">
-                                <i class="bi bi-pen"></i>
-                                Edit
-                            </button>
-                            <button href="#" class="btn btn-danger noteDeleteBtn">
-                                <i class="bi bi-trash-fill"></i>
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
+                                
             </div>
         </section>
         

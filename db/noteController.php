@@ -89,7 +89,7 @@
             try {
 
                 $statement = $conn->prepare($sql);
-                $statement->bindParam(1, $id, PDO::PARAM_INT);
+                $statement->bindParam(1, $id);
                 $statement->execute();
                 
                 return true;
