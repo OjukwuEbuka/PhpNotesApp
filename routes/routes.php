@@ -48,6 +48,10 @@ switch ($mode) {
             if($registerSuccess){
                 echo json_encode(["success" => true]);
             }
+            else
+            {
+                echo json_encode(["errors" => ["email" => "Email has been used!"]]);
+            }
 
         }
 

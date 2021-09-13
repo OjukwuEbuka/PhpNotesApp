@@ -49,7 +49,13 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+              <div id="registerSuccess" class="alert alert-success visually-hidden" role="alert">
+                Registration Successful!
+              </div>
               <form action="" id="registerForm">
+                <div class="errorDiv">
+  
+                </div>
                 <div class="mb-3">
                   <label for="userEmailAddress" class="form-label">Email address</label>
                   <input type="email" class="form-control" id="userEmailAddress" name="userEmailAddress">
@@ -89,6 +95,9 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
             </div>
             <div class="modal-body">
               <form action="" id="loginForm">
+                <div class="errorDiv">
+  
+                </div>
                 <div class="mb-3">
                   <label for="loginEmailAddress" class="form-label">Email address</label>
                   <input type="email" class="form-control" id="loginEmailAddress" name="loginEmailAddress">

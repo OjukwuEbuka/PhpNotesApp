@@ -8,6 +8,26 @@
 
         public function register($conn, $userEmail, $fullName, $password) {
 
+            $checkExists = "SELECT * FROM users WHERE email = :email";
+
+            try {
+                
+                $statement = $conn->prepare($checkExists);
+                $statement->bindValue(':email', $userEmail);
+                $result = $statement->execute();
+                
+                if($result && $statement->rowCount() == 1){
+                
+                    return false;
+                }
+
+            } catch (PDOException $e) {
+
+                echo $e->getMessage();
+                return false;
+
+            }
+
             $sql = "INSERT INTO users (email, fullName, password) VALUES (:email, :fullName, :password)";
             $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 

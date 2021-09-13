@@ -42,15 +42,27 @@ $("#registerForm").submit(function(event){
     request.done(function (response, textStatus, jqXHR){
 
         let data = JSON.parse(response)
+
         if(data.errors){
 
-            console.log(data)
+            handleFormErrors($("#registerForm .errorDiv"), data)
 
         }
         else if(data.success)
         {
-            // Log a message to the console
-            console.log("registered");
+            $('#registerSuccess').removeClass("visually-hidden");
+            document.querySelector('#registerForm').reset()
+
+            setTimeout(() =>{
+
+                let regModal = document.querySelector("#registerModal");
+                let loginModal = new bootstrap.Modal("#loginModal");
+
+                bootstrap.Modal.getInstance(regModal).hide()
+                loginModal.show()
+
+            }, 1500)
+
         }
     });
 
@@ -106,14 +118,13 @@ $("#loginForm").submit(function(event){
 
         if(data.errors){
 
-            console.log(data)
+            handleFormErrors($("#loginForm .errorDiv"), data)
 
         }
         else if(data.success)
         {
             // Log a message to the console
             window.location.href = "home.php";
-            console.log("Logged in");
         }
 
     });
@@ -134,6 +145,24 @@ $("#loginForm").submit(function(event){
    
 });
 
+
+function handleFormErrors(formErrorDiv, data) {
+
+    let errorString = "<ul>";
+
+    Object.values(data.errors).forEach(err => {
+        errorString += `
+            <li class="text-danger">${err}</li>
+        `
+    });
+
+    errorString += '</ul>'
+
+    console.log(formErrorDiv)
+
+    formErrorDiv.html(errorString);
+
+}
 
 
 })
