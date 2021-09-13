@@ -9,6 +9,10 @@ body{
     background-color: #e9ecef;
 }
 
+.fullHeightContainer{
+    height: calc(100vh - 56px);
+}
+
 #heroContainer{    
     background-color: #0c0c0c;
     display: flex;

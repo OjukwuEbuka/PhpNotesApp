@@ -102,6 +102,8 @@ $("#loginForm").submit(function(event){
     // Callback function that will be called on success
     request.done(function (response, textStatus, jqXHR){
 
+        let data = JSON.parse(response)
+
         if(data.errors){
 
             console.log(data)
@@ -110,6 +112,7 @@ $("#loginForm").submit(function(event){
         else if(data.success)
         {
             // Log a message to the console
+            window.location.href = "home.php";
             console.log("Logged in");
         }
 

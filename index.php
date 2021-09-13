@@ -26,15 +26,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
   </head>
   <body>
  
-      <nav class="navbar navbar-light navbarBg">
-        <div class="container-fluid">
-          <a class="navbar-brand">NotesApp</a>
-          <form class="d-flex">
-            <button type="button" class="btn btn-outline-dark me-2" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
-            <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-          </form>
-        </div>
-      </nav>
+    <?php   include('includes/navbar.php') ?>  
 
      
       <div id="heroContainer">
