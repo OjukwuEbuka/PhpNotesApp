@@ -50,6 +50,7 @@ if(!isset($_SESSION["loggedin"])){
             </div>
             <div class="modal-body">
               <form action="" id="noteForm">
+                  <input type="hidden" name="userId" value=<?php echo $_SESSION['id']; ?> />
                 <div class="errorDiv">
   
                 </div>
@@ -73,7 +74,7 @@ if(!isset($_SESSION["loggedin"])){
 
       <section class="p-5">
             <h4 class="text-center">My Notes</h4>
-            <div class="row row-cols-1 row-cols-md-3 g-4" id="notesList" style="max-width:100%">
+            <div class="text-center row row-cols-1 row-cols-md-3 g-4" id="notesList" style="max-width:100%">
                 
                 <div class="col">
                     <div class="card">

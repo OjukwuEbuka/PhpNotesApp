@@ -19,23 +19,19 @@ $("#registerForm").submit(function(event){
 
     // Serialize the data in the form
     let serializedData = $form.serialize();
+
+    //Add mode for route identification
     serializedData += "&mode=register";
 
-    // let serializedDataArray = $form.serializeArray();
 
-    // $inputs.prop("disabled", true);
-
-    // serializedDataArray.mode = "register";
-
-    // console.log(serializedData, dataArray)
+    $inputs.prop("disabled", true);
+    
     // Send the ajax request
     request = $.ajax({
         url: "routes/routes.php",
         type: "post",
         datatype: "json",
         data: serializedData
-        // contentType: "application/json",
-        // data: JSON.stringify({mode: "register", data: serializedDataArray}),
     });
 
     // Callback function that will be called on success
@@ -102,7 +98,8 @@ $("#loginForm").submit(function(event){
     let serializedData = $form.serialize();
     serializedData += "&mode=login";
 
-    // $inputs.prop("disabled", true);
+    $inputs.prop("disabled", true);
+
     // Send the ajax request
     request = $.ajax({
         url: 'routes/routes.php',
@@ -138,10 +135,10 @@ $("#loginForm").submit(function(event){
     });
 
     // Callback function that will be called regardless if the request failed or succeeded
-    // request.always(function () {
-    //     // Reenable the inputs
-    //     $inputs.prop("disabled", false);
-    // });
+    request.always(function () {
+        // Reenable the inputs
+        $inputs.prop("disabled", false);
+    });
    
 });
 

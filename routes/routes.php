@@ -2,6 +2,7 @@
 
 require_once '../db/config.php';
 require("../db/UserController.php");
+require("../db/NoteController.php");
 
 
 $mode = isset($_POST['mode']) ? $_POST['mode'] : null;
@@ -85,6 +86,95 @@ switch ($mode) {
             {
                 $errors["login"] = "Invalid email or password";
                 echo json_encode(["errors" => $errors]);
+            }
+
+        }
+
+        break;
+
+    case 'createNote':
+        
+        $errors = [];
+
+        //filter and Sanitize data
+        $title = filter_input(INPUT_POST, "noteTitle", FILTER_SANITIZE_STRING);
+        $body = filter_input(INPUT_POST, "noteBody", FILTER_SANITIZE_STRING);
+        $userId = filter_input(INPUT_POST, "userId", FILTER_SANITIZE_STRING);;
+
+        //Validate data
+        if(!$title){
+            $errors["title"] = "Title is not valid text";
+        }
+
+        if(!$title){
+            $errors["body"] = "Body is not valid text";
+        }
+
+
+
+
+        if(count($errors) > 0){
+
+            echo json_encode(["errors" => $errors]);
+
+        }
+        else
+        {
+            $newNote = new NoteController;
+
+            $createSuccess = $newNote->create($conn, $title, $body, $userId);
+
+            if($createSuccess){
+                echo json_encode(["success" => true]);
+            }
+            else
+            {
+                echo json_encode(["errors" => ["note" => "Failed to create note!"]]);
+            }
+
+        }
+
+        break;
+    
+    
+    case 'updateNote':
+        
+        $errors = [];
+
+        //filter and Sanitize data
+        $title = filter_input(INPUT_POST, "noteTitle", FILTER_SANITIZE_STRING);
+        $id = filter_input(INPUT_POST, "noteid", FILTER_SANITIZE_NUMBER_INT);
+        $body = filter_input(INPUT_POST, "noteBody", FILTER_SANITIZE_STRING);
+
+        //Validate data
+        if(!$title){
+            $errors["title"] = "Title is not valid text";
+        }
+
+        if(!$title){
+            $errors["body"] = "Body is not valid text";
+        }
+
+
+
+
+        if(count($errors) > 0){
+
+            echo json_encode(["errors" => $errors]);
+
+        }
+        else
+        {
+            $newNote = new NoteController;
+
+            $updateSuccess = $newNote->update($conn, $title, $body, $id);
+
+            if($updateSuccess){
+                echo json_encode(["success" => true]);
+            }
+            else
+            {
+                echo json_encode(["errors" => ["note" => "Failed to update note!"]]);
             }
 
         }
