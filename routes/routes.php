@@ -99,7 +99,7 @@ switch ($mode) {
         //filter and Sanitize data
         $title = filter_input(INPUT_POST, "noteTitle", FILTER_SANITIZE_STRING);
         $body = filter_input(INPUT_POST, "noteBody", FILTER_SANITIZE_STRING);
-        $userId = filter_input(INPUT_POST, "userId", FILTER_SANITIZE_STRING);;
+        $userId = filter_input(INPUT_POST, "userId", FILTER_SANITIZE_STRING);
 
         //Validate data
         if(!$title){
@@ -180,6 +180,23 @@ switch ($mode) {
         }
 
         break;
+
+    case "getAllNotes":
+
+        $userId = filter_input(INPUT_POST, "userId", FILTER_SANITIZE_STRING);
+
+        $allNotes = new NoteController;
+
+        $response = $allNotes->select($conn, $userId);
+
+        // print_r( $response);
+        if($response){
+            echo json_encode(["data" => $response]);
+        }
+        else
+        {
+            echo json_encode(["errors" => ["note" => "Failed to fetch notes!"]]);
+        }
     
     default:
         # code...

@@ -6,6 +6,7 @@
         {
         }
 
+        //Create a New Note
         public function create($conn, $title, $body, $userId) {
 
             $sql = "INSERT INTO notes (title, body, userId) VALUES (:title, :body, :userId)";
@@ -30,7 +31,7 @@
             
         }
         
-        
+        //Update a Note
         public function update($conn, $title, $body, $id) {
 
             $sql = "UPDATE notes set title=:title,  body=:body where id=:id";
@@ -55,31 +56,32 @@
             
         }
 
+        //Select all of a users Notes
+        public function select($conn, $userId) {
 
-        public function select($conn, $title, $body, $id) {
-
-            $sql = "SELECT * FROM notes";
+            $sql = "SELECT * FROM notes WHERE userId=:userId ORDER BY id DESC";
 
             try {
                 
                 $statement = $conn->prepare($sql);
+                $statement->bindParam(':userId', $userId);
                 $result = $statement->execute();
                 
                 if($result){
                 
-                    return $statement->fetchAll();
+                    return $this->getQuery($statement);
                 }
 
             } catch (PDOException $e) {
 
                 echo $e->getMessage();
-                return false;
+                // return false;
 
             }
             
         }
 
-
+        //Delete a Note
         public function delete($conn, $id) {
 
             $sql = "DELETE FROM notes WHERE id = ?";
@@ -97,6 +99,14 @@
                 return false;
             }
 
+        }
+
+        private function getQuery($qs){
+            $qArr = [];
+            while ($item = $qs->fetch(PDO::FETCH_ASSOC)) {
+                $qArr[] = $item;
+            }
+            return $qArr;
         }
 
     }

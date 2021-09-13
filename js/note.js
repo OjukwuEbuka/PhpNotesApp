@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
 
     let newNoteBtn = document.querySelector("#newNoteBtn");
-    let allNoteItems = document.querySelectorAll(".noteItem");
     let request;
 
+    //Fetch all notes for display
+    getAllNotes();
 
     newNoteBtn && newNoteBtn.addEventListener('click', function(e){
         e.preventDefault();
@@ -13,26 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let openNoteModal = new bootstrap.Modal('#noteModal');
         openNoteModal.show()
-
-    })
-
-
-    allNoteItems && allNoteItems.forEach(note => {
-        
-        let noteTitle = note.querySelector(".noteTitle").textContent;
-        let noteBody = note.querySelector(".noteBody").textContent;
-        let noteEditBtn = note.querySelector(".noteEditBtn");
-
-        noteEditBtn.addEventListener("click", function(e){
-            e.preventDefault();
-
-            let noteModal = document.querySelector('#noteModal');
-            noteModal.querySelector('#noteTitle').value = noteTitle;
-            noteModal.querySelector('#noteBody').value = noteBody;
-
-            let openNoteModal = new bootstrap.Modal('#noteModal');
-            openNoteModal.show()
-        })
 
     })
 
@@ -92,6 +73,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 }, 1500)
 
+                getAllNotes()
+
             }
         });
 
@@ -112,6 +95,81 @@ document.addEventListener("DOMContentLoaded", function() {
 
     });
 
+    function getAllNotes(){
+
+        // Abort any pending request
+        if (request) {
+            request.abort();
+        }
+
+        let userId = $("#loggedInUserId").val();
+
+        // Send the ajax request
+        request = $.ajax({
+            url: "routes/routes.php",
+            type: "post",
+            datatype: "json",
+            data: `userId=${userId}&mode=getAllNotes`
+        });
+
+        // Callback function that will be called on success
+        request.done(function (response, textStatus, jqXHR){
+
+            let data = JSON.parse(response)
+
+            if(data.errors){
+
+                handleFormErrors($("#noteForm .errorDiv"), data)
+
+            }
+            else if(data.data)
+            {
+                
+                let notesList = document.querySelector("#notesList")
+                let notesListBody = '';
+
+                //Iterate over returned notes and create cards from them
+                Object.values(data.data).forEach(note => {
+
+                    notesListBody += `
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body noteItem" data-id=${note.id}>
+                                    <h5 class="card-title noteTitle">${note.title}</h5>
+                                    <p class="card-text noteBody">${note.body}</p>
+                                    <button href="#" class="btn btn-primary noteEditBtn">
+                                        <i class="bi bi-pen"></i>
+                                        Edit
+                                    </button>
+                                    <button href="#" class="btn btn-danger noteDeleteBtn">
+                                        <i class="bi bi-trash-fill"></i>
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                })
+
+                notesList.innerHTML = notesListBody;
+                
+                activateNotes()
+
+            }
+
+        });
+
+        // Callback function that will be called on failure
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            
+            console.error(
+                "The following error occurred: "+
+                textStatus, errorThrown
+            );
+        });
+
+    }
+
     
     function handleFormErrors(formErrorDiv, data) {
 
@@ -128,6 +186,32 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(formErrorDiv)
 
         formErrorDiv.html(errorString);
+
+    }
+
+    function activateNotes(){
+
+        let allNoteItems = document.querySelectorAll(".noteItem");
+
+
+        allNoteItems && allNoteItems.forEach(note => {
+        
+            let noteTitle = note.querySelector(".noteTitle").textContent;
+            let noteBody = note.querySelector(".noteBody").textContent;
+            let noteEditBtn = note.querySelector(".noteEditBtn");
+    
+            noteEditBtn.addEventListener("click", function(e){
+                e.preventDefault();
+    
+                let noteModal = document.querySelector('#noteModal');
+                noteModal.querySelector('#noteTitle').value = noteTitle;
+                noteModal.querySelector('#noteBody').value = noteBody;
+    
+                let openNoteModal = new bootstrap.Modal('#noteModal');
+                openNoteModal.show()
+            })
+    
+        })
 
     }
 })
